@@ -1,0 +1,41 @@
+.board {
+    display: table;
+}
+
+.cell {
+    display: table-cell;
+    height: 100px;
+    width: 100px;
+    padding: 5px;
+    background-color: bisque;
+    border: 1px solid black;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.conn {
+    padding: 20px;
+    width: 63%;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+}
+
+.ref{
+    background-color: red;
+    color: white;
+}
+
+.wait {
+    background-color: yellow;
+    color: purple;
+}
