@@ -21,7 +21,7 @@ function handleClose() {
 
 function handleMsg(msg) {
     var data = msg.data
-    console.log('data:', data)
+    console.log(data)
 
     if (data == "|check|") {
         sendField()
@@ -63,6 +63,7 @@ function handleMsg(msg) {
         document.getElementById('divRestart').removeAttribute('hidden')
         document.getElementById('divWon').setAttribute('hidden', true)
         document.getElementById('divLose').setAttribute('hidden', true)
+        document.getElementById('divDraw').setAttribute('hidden', true)
         restarted = true
     }
 

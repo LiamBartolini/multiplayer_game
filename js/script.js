@@ -20,8 +20,6 @@ function removeInput() {
 
     var slc = document.getElementById('slcSegno')
     slc.parentNode.removeChild(slc)
-
-    return false
 }
 
 function game() {
@@ -125,20 +123,20 @@ function stopGame() {
     document.getElementById('stopPlayingDiv').append(lblStop, btnStop)
 }
 
-function handleRestartGame(sendingMsg) {
+function handleRestartGame() {
     // pulire il campo
     emptyField()
     
     // dire al server che riparte una partita
     sendMsg('|restart|')
+
     // riattivare gli event listener
-    for (let i = 0; i < cells.length; i++) {
-        const element = cells[i];
-        element.addEventListener('click', handleCellClick)
-    }
+    game()
 
     document.getElementById('divRestart').setAttribute('hidden', true)
     document.getElementById('divDraw').setAttribute('hidden', true)
+    document.getElementById('divWon').setAttribute('hidden', true)
+    document.getElementById('divLose').setAttribute('hidden', true)
 
     document.getElementById('btnRestart').remove()
     document.getElementById('lblRestart').remove()
@@ -149,7 +147,6 @@ function handleRestartGame(sendingMsg) {
 function emptyField() {
     for (let i = 0; i < cells.length; i++) {
         const element = cells[i];
-        console.log(element.childNodes)
         if (element.hasChildNodes()) {
             element.removeChild(element.lastChild)
         }
