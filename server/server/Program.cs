@@ -1,12 +1,22 @@
-﻿using server.Models;
+﻿using System;
+using server.Models;
 using WebSocketSharp.Server;
 
-WebSocketServer wss = new("ws://localhost:9000");
+namespace server
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WebSocketServer wss = new WebSocketServer("ws://localhost:9000");
 
-wss.AddWebSocketService<Game>("/Game");
-wss.Start();
+            wss.AddWebSocketService<Game>("/Game");
+            wss.Start();
 
-Console.WriteLine("server -> ws://localhost:9000/Game");
+            Console.WriteLine("Server --> ws://localhost:9000/Game");
 
-Console.ReadKey();
-wss.Stop();
+            Console.ReadKey();
+            wss.Stop();
+        }
+    }
+}

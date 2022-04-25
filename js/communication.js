@@ -1,54 +1,33 @@
 const URL = 'ws://localhost:9000/Game'
 var ws
 
-// class Field {
-//     segno = ''
-//     field = []
-    
-//     constructor(campo, segno) {
-//         var row1 = []
-//         var row2 = []
-//         var row3 = []
-//         this.segno = segno;
-//         for (let i = 0; i < campo.length; i++) {
-//             var nome = ''
-//             const element = campo[i];
-//             if (element.hasChildNodes()) {
-//                 var fchild = campo[i].firstChild
-//                 var nomeCompleto = fchild.getAttribute('src')
-//                 nome = nomeCompleto.split('/')[2].split('.')[0]        
-//             }
-
-//             if (i < 3) {
-//                 row1.push(nome != '' ? nome : 'vuoto')
-//             } else if (i >= 3 && i <= 5) {
-//                 row2.push(nome != '' ? nome : 'vuoto')
-//             } else {
-//                 row3.push(nome != '' ? nome : 'vuoto')
-//             }
-//         }
-
-//         this.field.push(row1, row2, row3)
-//     }
-// }
-
 function connect() {
     ws = new WebSocket(URL)
 
     ws.onopen = handleOpen
 
     ws.onmessage = handleMsg
+
+    ws.onclose = handleClose
 }
 
 function handleOpen() {
     sendMsg(`|conn|new-${segnoUtente}`)
 }
 
+function handleClose() {
+    sendMsg(`|quit|${userID}`)
+}
+
 function handleMsg(msg) {
     var data = msg.data
     console.log('data:', data)
 
-    if (data.startsWith('|field|')) {
+    if (data == "|check|") {
+        sendField()
+    }
+
+    if (data.startsWith('|move|')) {
         var segno = data.split('|')[2].split('-')[0]
         var pos = parseInt(data.split('|')[2].split('-')[1])
         printInField(pos, segno)
@@ -61,7 +40,6 @@ function handleMsg(msg) {
 
     if (data.startsWith('|conn|accepted')) {
         userID = parseInt(data.split('-')[1])
-        document.getElementById('userID').innerHTML = userID
     }
 
     if (data.includes('start')) {
@@ -74,6 +52,33 @@ function handleMsg(msg) {
 
     if (data.includes('refused')) {
         document.getElementById('divRef').removeAttribute('hidden')
+    }
+
+    if (data === '|quit|') {
+        document.getElementById('divQuit').removeAttribute('hidden')
+        otherClientQuit()
+    }
+
+    if (data === '|restart|') {
+        document.getElementById('divRestart').removeAttribute('hidden')
+        document.getElementById('divWon').setAttribute('hidden', true)
+        document.getElementById('divLose').setAttribute('hidden', true)
+        restarted = true
+    }
+
+    if (data === "|draw|") {
+        stopGame()
+        document.getElementById('divDraw').removeAttribute('hidden')
+    }
+
+    if (data == '|won|') {
+        stopGame()
+        document.getElementById('divWon').removeAttribute('hidden')
+    }
+    
+    if (data == '|lost|') {
+        stopGame()
+        document.getElementById('divLose').removeAttribute('hidden')
     }
 }
 

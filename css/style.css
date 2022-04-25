@@ -21,7 +21,7 @@ img {
     height: 100px;
 }
 
-.conn {
+.banner {
     padding: 20px;
     width: 63%;
     border-radius: 10px;
@@ -38,4 +38,29 @@ img {
 .wait {
     background-color: yellow;
     color: purple;
+}
+
+.won {
+    background-color: green;
+    color: white;
+}
+
+.lose {
+    background-color: red;
+    color: white;
+}
+
+.restart {
+    background-color: blue;
+    color: white;
+}
+
+.quit {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.draw {
+    background-color: #ebc8b2;
+    color: black;
 }
