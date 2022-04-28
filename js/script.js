@@ -43,6 +43,7 @@ function handleCellClick(e) {
     var target = e.target
     var img = document.createElement('img')
     img.setAttribute('src', `../img/${segnoUtente}.png`)
+    img.setAttribute('class', 'imgSegno')
     target.appendChild(img)
 
     // togliere la possibilità di cliccare sulla stessa casella due volte
@@ -56,6 +57,7 @@ function handleCellClick(e) {
 function printInField(pos, segno) {
     var img = document.createElement('img')
     img.setAttribute('src', `../img/${segno}.png`)
+    img.setAttribute('class', 'imgSegno')
     cells[pos].appendChild(img)
 }
 

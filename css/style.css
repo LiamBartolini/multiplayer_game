@@ -16,7 +16,7 @@
     margin: auto;
 }
 
-img {
+.imgSegno {
     width: 100px;
     height: 100px;
 }
@@ -63,4 +63,9 @@ img {
 .draw {
     background-color: #ebc8b2;
     color: black;
+}
+
+img {
+    width: 100px;
+    height: 100px;
 }
