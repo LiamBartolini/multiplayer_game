@@ -44,18 +44,22 @@ function handleCellClick(e) {
     var img = document.createElement('img')
     img.setAttribute('src', `../img/${segnoUtente}.png`)
     target.appendChild(img)
+
+    // togliere la possibilità di cliccare sulla stessa casella due volte
     target.removeEventListener('click', handleCellClick)
 
     sendMsg(`|move|${segnoUtente}-${target.getAttribute('id')}`)
     waintingOtherMove()
 }
 
+// serve per stampare la mossa dell'altro client sullo schermo
 function printInField(pos, segno) {
     var img = document.createElement('img')
     img.setAttribute('src', `../img/${segno}.png`)
     cells[pos].appendChild(img)
 }
 
+// blocca il campo in attesa della mossa dell'altro client
 function waintingOtherMove() {
     for (let i = 0; i < cells.length; i++) {
         const element = cells[i];
@@ -65,6 +69,7 @@ function waintingOtherMove() {
     }
 }
 
+// imposta gli event listener sulle caselle ancora non utilizzate
 function setEventListenersFreeCell() {
     for (let i = 0; i < cells.length; i++) {
         const element = cells[i];
